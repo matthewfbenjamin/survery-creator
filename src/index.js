@@ -4,9 +4,12 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from "react-redux";
-import store from "./store";
+import store from "./store"
+import Full from './Full'
 
 ReactDOM.render(<Provider store={store}>
-    <App />
+    <Full>
+      <App />
+  </Full>
   </Provider>, document.getElementById('root'));
 registerServiceWorker();

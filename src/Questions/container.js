@@ -11,50 +11,46 @@ class Container extends Component {
     super(props)
     autoBind(this)
     this.state = {
-      title: {
-        value: '',
-        count: 0,
+      currentQuestion: {
+        title: '',
+        titleCount: 0,
+        type: 'text',
+        answers: [],
       },
-      description: {
-        value: '',
-        count: 0,
-      },
-      textError: null,
-      points: {
-        value: 1,
-        error: null,
-      }
+      currentAnswer: '',
+      currentAnswerError: null,
     }
   }
 
   handleChange (event) {
+    const count = event.target.name === 'title' ? event.target.value.length : this.state.currentQuestion.titleCount
+    const answersArr = event.target.name === 'type' ? [] : this.state.currentQuestion.answers
     this.setState({
-      [event.target.name]: {
-        ...this.state[event.target.name],
-        value: event.target.value,
-        count: event.target.value.length,
+      currentQuestion: {
+        ...this.state.currentQuestion,
+        [event.target.name]: event.target.value,
+        titleCount: count,
+        answers: answersArr,
       }
     })
   }
 
-  handleNumberChange (event) {
-    const maxInt = parseInt(event.target.max, 10)
-    const valueInt = parseInt(event.target.value, 10)
-    let valueToUse = event.target.value
-    let error = null
-    if (valueInt > maxInt) {
-      valueToUse = event.target.max
-      error = 'Max amount is 100'
+  handleAnswerChange (event) {
+    this.setState({ currentAnswer: event.target.value })
+  }
+
+  handleAnswerSubmit (event) {
+    if (this.state.currentAnswer.length > 0) {
+      this.setState({
+        currentQuestion: {
+          ...this.state.currentQuestion,
+          answers: [...this.state.currentQuestion.answers, this.state.currentAnswer]
+        }
+      })
+    } else {
+      this.setState({ currentAnswerError: 'Please fill in the field before hitting +' })
     }
-    if (event.target.value)
-    this.setState({
-      [event.target.name]: {
-        ...this.state[event.target.name],
-        value: valueToUse,
-        count: event.target.value.length,
-        error,
-      }
-    })
+    event.preventDefault()
   }
 
   handleSubmit (event) {
@@ -75,6 +71,9 @@ class Container extends Component {
         handleChange={this.handleChange}
         handleNumberChange={this.handleNumberChange}
         handleSubmit={this.handleSubmit}
+        handleAnswerChange={this.handleAnswerChange}
+        handleAnswerSubmit={this.handleAnswerSubmit}
+        handleRadioChange={this.handleRadioChange}
       />
     );
   }

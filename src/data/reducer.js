@@ -1,38 +1,16 @@
-import { ADD_TODO, TOGGLE_TODO } from "./constants";
+import * as c from './constants'
 
 const initialState = {
-  allIds: [],
-  byIds: {}
-};
+  homeFormValues: {}
+}
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case ADD_TODO: {
-      const { id, content } = action.payload;
+    case c.HOME_FORM_SUBMITTED: {
       return {
         ...state,
-        allIds: [...state.allIds, id],
-        byIds: {
-          ...state.byIds,
-          [id]: {
-            content,
-            completed: false
-          }
-        }
-      };
-    }
-    case TOGGLE_TODO: {
-      const { id } = action.payload;
-      return {
-        ...state,
-        byIds: {
-          ...state.byIds,
-          [id]: {
-            ...state.byIds[id],
-            completed: !state.byIds[id].completed
-          }
-        }
-      };
+        homeFormValues: action.values,
+      }
     }
     default:
       return state;

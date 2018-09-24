@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, { Component } from 'react'
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
-import logo from './logo.svg';
-import './App.css';
+import './App.scss'
 
 import Home from './Home'
-
+import Questions from './Questions'
 class App extends Component {
   render() {
     return (
       <Router>
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/questions" component={Questions} />
           <Route render={() => <div>404: Page not found!</div>} />
         </Switch>
       </Router>
