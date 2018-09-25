@@ -1,18 +1,5 @@
 import React from 'react'
 
-const test = [
-  {
-    answers: ["1", "2"],
-    title: "A",
-    titleCount: 1,
-    type: "checkbox",
-  },
-  {
-    title: "B",
-    titleCount: 1,
-    type: "text",
-  }
-]
 const QuestionPicker = (props) => {
   return (
     <div className="question-list">

@@ -26,6 +26,12 @@ class Container extends Component {
     this.state = initState
   }
 
+  componentDidMount() {
+    if (!this.props.home.title) {
+      this.props.history.push('/')
+    }
+  }
+
   handleChange (event) {
     const count = event.target.name === 'title' ? event.target.value.length : this.state.currentQuestion.titleCount
     const answersArr = event.target.name === 'type' ? [] : this.state.currentQuestion.answers
@@ -129,6 +135,7 @@ class Container extends Component {
 
 const mapStateToProps = state => {
   return {
+    home: state.data.homeFormValues,
     questions: state.data.questions,
   }
 }
