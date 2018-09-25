@@ -1,7 +1,6 @@
 import React from 'react'
 
 const QuestionPicker = (props) => {
-  console.log(props)
   return (
     <div className="question-card">
       <form onSubmit={props.handleSubmit}>
@@ -66,17 +65,19 @@ const QuestionPicker = (props) => {
         {props.currentAnswerError && <span>{ props.currentAnswerError }</span>}
           <ul className="answer-list">
             {props.currentQuestion.answers.length > 0 && <li><h3>Current Answers:</h3></li>}
-            {props.currentQuestion.answers.map(answer => (
-              <li>
-              <span className="answer-list-name">
-                {answer}
-              </span>
-              <div className="answer-remove">-</div></li>)
-            )}
+            {props.currentQuestion.answers.map((answer, idx) => (
+              <li key={idx}>
+                <div onClick={() => props.handleAnswerRemove(answer)} className="answer-remove"><span>-</span></div>
+                <span className="answer-list-name">
+                  {answer}
+                </span>
+              </li>
+            ))}
           </ul>
         </div>
       }
-      <div className="submit-button" onClick={props.handleSubmit}>
+      {props.currentQuestionError && <div><span className="error-text">{props.currentQuestionError}</span></div>}
+      <div className="submit-button" onClick={props.handleQuestionSubmit}>
         <span>Add Question</span>
       </div>
     </div>

@@ -6,3 +6,13 @@ export const submitHomeForm = values => {
     values,
   })
 }
+
+export const submitQuestion = currentQuestion => ({
+  type: c.QUESTION_SUBMITTED,
+  currentQuestion,
+})
+
+export const updateQuestionsArr = questionsArr => ({
+  type: c.UPDATE_QUESTIONS_ARR,
+  questionsArr,
+})

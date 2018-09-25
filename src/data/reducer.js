@@ -1,7 +1,8 @@
 import * as c from './constants'
 
 const initialState = {
-  homeFormValues: {}
+  homeFormValues: {},
+  questions: [],
 }
 
 export default function (state = initialState, action) {
@@ -10,6 +11,18 @@ export default function (state = initialState, action) {
       return {
         ...state,
         homeFormValues: action.values,
+      }
+    }
+    case c.QUESTION_SUBMITTED: {
+      return {
+        ...state,
+        questions: [...state.questions, action.currentQuestion]
+      }
+    }
+    case c.UPDATE_QUESTIONS_ARR: {
+      return {
+        ...state,
+        questions: action.questionsArr,
       }
     }
     default:

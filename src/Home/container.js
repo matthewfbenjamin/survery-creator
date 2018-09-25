@@ -61,7 +61,11 @@ class Container extends Component {
     if (this.state.title.count < 1 || this.state.description.count < 1) {
       this.setState({ textError: 'Please fill in all fields' })
     } else {
-      this.props.dataActions.submitHomeForm(this.state)
+      this.props.dataActions.submitHomeForm({
+        title: this.state.title.value,
+        description: this.state.description.value,
+        pointValue: this.state.points.value,
+      })
       this.props.history.push('/questions')
       event.preventDefault()
     }

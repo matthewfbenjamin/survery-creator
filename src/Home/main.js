@@ -6,6 +6,7 @@ const Main = (props) => {
   return (
     <div className="description-wrapper">
       <form className="description-form" onSubmit={props.handleSubmit}>
+        <h1>Survey Creator</h1>
         <label className="input-label-wrapper">
           <span>Title:</span>
           <input
